@@ -257,20 +257,20 @@ input:focus { border-color: #D64D83; }
 
         <div class="bank-info">
             Bank tujuan
-            <strong>MANDIRI</strong>
+            <strong>BNI</strong>
         </div>
 
         <div class="account-row">
             <div class="bank-info">
                 Nomor rekening
-                <strong id="rekening">ISI NOMOR REKENING RESMI</strong>
+                <strong id="rekening">2134 3624 21</strong>
             </div>
             <button class="copy-btn" onclick="copyRekening()">Salin</button>
         </div>
 
         <div class="bank-info">
             Nama pemilik rekening
-            <strong>ISI NAMA PEMILIK REKENING</strong>
+            <strong>KEVIN DANIEL LAIA</strong>
         </div>
     </section>
 
@@ -328,7 +328,7 @@ async function copyText(value, successMessage) {
 function copyRekening() {
     const rekening = document.getElementById("rekening").textContent.trim();
     if (rekening.includes("ISI NOMOR")) {
-        alert("Nomor rekening belum diisi.");
+        alert("2134362421");
         return;
     }
     copyText(rekening, "Nomor rekening berhasil disalin!");
@@ -344,7 +344,7 @@ function copyNominal() {
 }
 
 function konfirmasi() {
-    alert("Silakan hubungi admin untuk konfirmasi pembayaran.");
+    window.location.href = "http://akunastroqoradigital.com/";
 }
 
 const params = new URLSearchParams(window.location.search);
