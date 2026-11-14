@@ -308,40 +308,38 @@ function updateTotal() {
     window.history.replaceState({}, "", url);
 }
 
-function setNominal(value, button) {
-    document.getElementById("nominal").value = value;
-    document.querySelectorAll(".presets button")
-        .forEach(btn => btn.classList.remove("active"));
-    button.classList.add("active");
-    updateTotal();
+amount.addEventListener('input', updateTotal);
+
+document.querySelectorAll('.presets button')
+  .forEach(button => {
+    button.addEventListener('click', () => {
+      amount.value = button.dataset.amount;
+      updateTotal();
+    });
+  });
+
+async function copyText(text, message) {
+  try {
+    await navigator.clipboard.writeText(text);
+    alert(message);
+  } catch (error) {
+    prompt('Salin teks berikut:', text);
+  }
 }
 
-async function copyText(value, successMessage) {
-    try {
-        await navigator.clipboard.writeText(value);
-        alert(successMessage);
-    } catch (error) {
-        alert("Gagal menyalin. Silakan salin secara manual.");
-    }
-}
+updateTotal();document.getElementById('copyAccount')
+  .addEventListener('click', () => {
+    copyText('2134362421', 'Nomor rekening disalin.');
+  });
 
-function copyRekening() {
-    const rekening = document.getElementById("rekening").textContent.trim();
-    if (rekening.includes("ISI NOMOR")) {
-        alert("2134362421");
-        return;
-    }
-    copyText(rekening, "Nomor rekening berhasil disalin!");
-}
+document.getElementById('copyAmount')
+  .addEventListener('click', () => {
+    copyText(
+      String(Number(amount.value) || 0),
+      'Nominal transfer disalin.'
+    );
+  });
 
-function copyNominal() {
-    const nominal = Number(document.getElementById("nominal").value);
-    if (!nominal || nominal <= 0) {
-        alert("Masukkan nominal terlebih dahulu.");
-        return;
-    }
-    copyText(String(nominal), "Nominal berhasil disalin!");
-}
 
 function konfirmasi() {
     window.location.href = "http://akunastroqoradigital.com/";
